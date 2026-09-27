@@ -1,42 +1,55 @@
-# Linear SVM from Scratch (Portfolio Sample)
+# Linear SVM from Scratch
 
-This repository implements a **soft-margin linear SVM** from scratch using NumPy,
-trained by batch gradient descent on the hinge loss with L2 regularization.
-It also includes a brief **Gaussian kernel Gram matrix** demo (educational) and
-clean plots of the learned decision boundary on synthetic data.
+An educational NumPy implementation of a soft-margin linear support vector machine,
+with an executed synthetic-data example and a scikit-learn comparison.
 
-## What this shows
-- From-scratch optimization of **hinge loss + L2** (soft-margin SVM)
-- Clear, reproducible notebook with decision boundary visualizations
-- Educational **Gram matrix** (RBF) construction
-- Comparison to `scikit-learn`'s `LinearSVC` as a sanity check
+The objective is `0.5 * ||w||² + C * sum(max(0, 1 - y * (Xw + b)))`, with labels
+`-1` and `+1` and an unregularized intercept. Batch **subgradient** steps decrease as
+`lr / sqrt(iteration)`. The model retains the parameters with the lowest observed objective.
+The stopping rule based on small objective changes is a heuristic, not an optimality certificate.
 
-## Structure
-```
-.
-├── notebooks
-│   └── svm_from_scratch.ipynb   # Training, plots, Gram matrix demo
-├── src
-│   └── svm_scratch.py           # Minimal SVM class (NumPy)
-├── README.md
-├── requirements.txt
-├── LICENSE
-└── .gitignore
-```
+## Example and comparison
 
-## Quickstart
+- Generate 600 synthetic observations with two features.
+- Reserve 150 test observations; fit the scaler on 450 training observations only.
+- Compare with `LinearSVC(loss='hinge')` using fixed parameters.
+- Plot the training objective, decision boundary and held-out observations.
+- Build an RBF Gram matrix separately to illustrate a kernel similarity matrix.
+
+The reference uses a different optimizer and also regularizes its synthetic intercept feature.
+Identical coefficients are not expected. This is a linear classifier; the RBF matrix is not a
+kernel-SVM implementation. The optimizer is sensitive to scale and learning rate and is not
+intended to replace a production solver.
+
+## Files
+
+| Path | Purpose |
+|---|---|
+| [notebooks/svm_from_scratch.ipynb](notebooks/svm_from_scratch.ipynb) | Executed training and visualizations |
+| [src/svm_scratch.py](src/svm_scratch.py) | Validated inputs, optimization and prediction |
+| [tests/test_svm.py](tests/test_svm.py) | Updated-parameter objective and retained-model checks |
+
+## Run locally
+
+Use Python 3.12 and a separate environment for this project. From the repository folder:
+
 ```bash
 python -m venv .venv
-# Windows: .venv\Scripts\activate
-# Linux/Mac: source .venv/bin/activate
-pip install -r requirements.txt
+```
+
+Activate with `.venv\Scripts\activate` in Windows Command Prompt or
+`source .venv/bin/activate` on Linux/macOS, then run:
+
+```bash
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
 jupyter notebook notebooks/svm_from_scratch.ipynb
 ```
 
-## Notes
-- The scratch model is **linear**; the RBF Gram matrix cell is for intuition/visuals, not a full kernel-SVM solver.
-- Plots are made with `matplotlib` only.
-- Code is kept concise and readable for portfolio review.
+The notebook finds the repository from either its root folder or `notebooks/`.
+The saved outputs come from CPU execution with the included data; see
+[validation](docs/VALIDATION.md) for the checks and limits.
 
 ## License
-MIT
+
+MIT — see [LICENSE](LICENSE).
