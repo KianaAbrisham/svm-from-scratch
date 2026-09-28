@@ -50,6 +50,10 @@ The notebook finds the repository from either its root folder or `notebooks/`.
 The saved outputs come from CPU execution with the included data; see
 [validation](docs/VALIDATION.md) for the checks and limits.
 
+## Learning focus and development
+
+The main learning task is following the hinge-loss subgradient and understanding how the learning-rate schedule affects optimization. The implementation, tests, executed comparison, and documentation were revised with AI coding assistance. The repository exposes the objective history and retained parameters so the optimization can be inspected directly.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
