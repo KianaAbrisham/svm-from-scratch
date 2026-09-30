@@ -1,5 +1,7 @@
 # Linear SVM from Scratch
 
+[![Checks](https://github.com/KianaAbrisham/svm-from-scratch/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/KianaAbrisham/svm-from-scratch/actions/workflows/checks.yml)
+
 An educational NumPy implementation of a soft-margin linear support vector machine,
 with an executed synthetic-data example and a scikit-learn comparison.
 
@@ -50,9 +52,7 @@ The notebook finds the repository from either its root folder or `notebooks/`.
 The saved outputs come from CPU execution with the included data; see
 [validation](docs/VALIDATION.md) for the checks and limits.
 
-## Learning focus and development
-
-The main learning task is following the hinge-loss subgradient and understanding how the learning-rate schedule affects optimization. The implementation, tests, executed comparison, and documentation were revised with AI coding assistance. The repository exposes the objective history and retained parameters so the optimization can be inspected directly.
+[Development notes](https://github.com/KianaAbrisham/KianaAbrisham/blob/main/docs/DEVELOPMENT.md)
 
 ## License
 
